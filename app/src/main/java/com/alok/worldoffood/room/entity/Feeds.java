@@ -1,6 +1,7 @@
 package com.alok.worldoffood.room.entity;
 
 
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
@@ -10,8 +11,10 @@ public class Feeds {
 
 
 
-    @PrimaryKey(autoGenerate = true)
-    private   Long feed_id;
+
+    @NonNull
+    @PrimaryKey
+    private  String feed_id;
 
     @ColumnInfo(name = "profile_name")
     private String profileName;
@@ -33,8 +36,13 @@ public class Feeds {
     @ColumnInfo(name = "bookmark")
     private Boolean bookmark;
 
+    public Feeds(){
+        //empty constructor needed for firebase database
+    }
+
 
     public Feeds(String profileName, String location, String feedImage, String caption, Boolean like, Boolean bookmark) {
+
         this.profileName = profileName;
         this.location = location;
         this.feedImage = feedImage;
@@ -92,11 +100,11 @@ public class Feeds {
         this.bookmark = bookmark;
     }
 
-    public Long getFeed_id() {
+    public String getFeed_id() {
         return feed_id;
     }
 
-    public void setFeed_id(Long feed_id) {
+    public void setFeed_id(String feed_id) {
         this.feed_id = feed_id;
     }
 }

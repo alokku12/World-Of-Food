@@ -16,6 +16,8 @@ import com.alok.worldoffood.R;
 
 public class DashboardFragment extends Fragment {
 
+    private static final String TAG = "Full Page Media Player";
+
     private DashboardViewModel dashboardViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,

@@ -9,7 +9,7 @@ import androidx.room.RoomDatabase;
 import com.alok.worldoffood.room.dao.FeedDao;
 import com.alok.worldoffood.room.entity.Feeds;
 
-@Database(entities = {Feeds.class},version = 2)
+@Database(entities = {Feeds.class},version = 3)
 public abstract class WorldOfFoodDatabase  extends RoomDatabase {
 
 

@@ -79,7 +79,7 @@ public class FeedRepository {
     }
 
 
-    public void deleteFromId(long ID){
+    public void deleteFromId(String ID){
 
         mFeedDao.deleteFromId(ID);
     }

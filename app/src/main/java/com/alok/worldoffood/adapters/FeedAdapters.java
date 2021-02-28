@@ -60,10 +60,14 @@ public class FeedAdapters extends RecyclerView.Adapter<FeedAdapters.FeedViewHold
 
         holder.profileName.setText(feedsList.get(position).getProfileName());
 
-      //  holder.profileImage.setImageResource(feedsList.get(position).getProfileImage());
 
-        Picasso.get().load(feedsList.get(position).getFeedImage()).resize(500,450).centerCrop().
-                into(holder.postFeed);
+            Picasso.get().load(feedsList.get(position).getFeedImage()).resize(500,450).rotate(90.0f).centerCrop().
+                    into(holder.postFeed);
+
+
+
+
+
 
     }
 
@@ -83,6 +87,8 @@ public class FeedAdapters extends RecyclerView.Adapter<FeedAdapters.FeedViewHold
 
             profileName = itemView.findViewById(R.id.profile_name);
             postFeed = itemView.findViewById(R.id.post_feed);
+            //default image
+            postFeed.setImageResource(R.drawable.feed);
 
         }
     }

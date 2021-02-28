@@ -30,7 +30,7 @@ public interface FeedDao {
     void deleteAll();
 
     @Query("DELETE FROM feeds_table where feed_id= :ID")
-    void deleteFromId(long ID);
+    void deleteFromId(String ID);
 
     @Query("SELECT * FROM feeds_table")
     LiveData <List<Feeds>> getAllFeed();

@@ -1,9 +1,11 @@
 package com.alok.worldoffood.ui.addPost;
 
+import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -27,9 +29,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.alok.worldoffood.MainActivity;
 import com.alok.worldoffood.R;
 import com.alok.worldoffood.adapters.GalleryImageAdapter;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
 import java.io.FileNotFoundException;
+import java.util.UUID;
 
 import static androidx.navigation.Navigation.findNavController;
 
@@ -153,12 +163,20 @@ public class AddFragment extends Fragment implements GalleryImageAdapter.Gallery
             ImageView imageView = root.findViewById(R.id.post_photo);
             Picasso.get().load(imageUri).resize(400, 400).into(imageView);
 
+
+
             imagePath = imageUri.toString();
 
-            SharedPreferences sharedPreferences = getActivity().getSharedPreferences("post", Context.MODE_PRIVATE);
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putString("post_image", imageUri.toString());
-            editor.apply();
+           // uploadToFirebase(getActivity());
+
+
+
+
+
+
+         //   Log.d(TAG, "onActivityResult: "+imagePath+" "+imageUri);
+
+
 
             ImageView postButton = root.findViewById(R.id.go_to_post);
             imageSelected = true;
@@ -205,6 +223,42 @@ public class AddFragment extends Fragment implements GalleryImageAdapter.Gallery
 
 
        // Toast.makeText(getContext(),position,Toast.LENGTH_LONG).show();
+
+    }
+
+    Uri URL;
+
+
+    public void uploadToFirebase( Activity activity){
+
+
+
+
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        StorageReference storageRef = storage.getReference();
+        StorageReference mountainsRef = storageRef.child("/feeds/images/"+ UUID.randomUUID());
+        UploadTask uploadTask = mountainsRef.putFile(imageUri);
+
+
+        uploadTask.addOnSuccessListener(activity, new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
+
+                mountainsRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        String URL = uri.toString();
+                        Log.d(TAG, "onSuccess: "+URL);
+                    }
+                });
+
+
+
+            }
+        });
+
+
 
     }
 }

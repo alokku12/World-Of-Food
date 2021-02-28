@@ -10,7 +10,7 @@ public class DashboardViewModel extends ViewModel {
 
     public DashboardViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is dashboard fragment");
+        mText.setValue("For Viewpager 2 vertical camera videos full page media player video");
     }
 
     public LiveData<String> getText() {

@@ -45,11 +45,13 @@ public class GalleryImageAdapter extends RecyclerView.Adapter<GalleryImageAdapte
         layoutInflater = LayoutInflater.from(context);
         this.listener=listener;
     }
+    boolean gallery = false;
 
     public void setTheGallery(){
 
         galleryList = GalleryImages.listOfImages(context);
         Log.d(TAG, "setTheGallery: "+galleryList.toString());
+        gallery=true;
 
     }
 
@@ -57,6 +59,7 @@ public class GalleryImageAdapter extends RecyclerView.Adapter<GalleryImageAdapte
 
         galleryList = profileGallery;
         Log.d(TAG, "setTheGallery: "+galleryList.toString());
+        gallery=false;
 
     }
 
@@ -79,7 +82,12 @@ public class GalleryImageAdapter extends RecyclerView.Adapter<GalleryImageAdapte
 
 
 
-        Picasso.get().load("file://"+galleryList.get(position)).centerCrop().resize(200,200).into(holder.imageView);
+        if(gallery) {
+            Picasso.get().load("file://" + galleryList.get(position)).centerCrop().resize(200, 200).into(holder.imageView);
+        }
+        else{
+            Picasso.get().load(galleryList.get(position)).rotate(90.0f).centerCrop().resize(200, 200).into(holder.imageView);
+        }
 
      //   Glide.with(context).load(galleryList.get(position)).fitCenter().into(holder.imageView);
 

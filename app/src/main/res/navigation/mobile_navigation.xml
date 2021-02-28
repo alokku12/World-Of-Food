@@ -9,19 +9,24 @@
         android:id="@+id/navigation_feed"
         android:name="com.alok.worldoffood.ui.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home"/>
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_navigation_feed_to_cameraFragment2"
+            app:destination="@id/cameraFragment2" />
+    </fragment>
 
     <fragment
-        android:id="@+id/navigation_search"
+        android:id="@+id/navigation_add"
         android:name="com.alok.worldoffood.ui.dashboard.DashboardFragment"
         android:label="@string/title_dashboard"
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
-        android:id="@+id/navigation_add"
+        android:id="@+id/navigation_search"
         android:name="com.alok.worldoffood.ui.addPost.AddFragment"
         android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" >
+
+        tools:layout="@layout/fragment_notifications">
         <action
             android:id="@+id/action_navigation_add_to_postFragment"
             app:destination="@id/postFragment" />
@@ -40,16 +45,22 @@
         android:id="@+id/postFragment"
         android:name="com.alok.worldoffood.ui.post.PostFragment"
         android:label="post_fragment"
-        tools:layout="@layout/post_fragment" >
+        tools:layout="@layout/post_fragment"
+        app:startDestination="@id/action_postFragment_to_navigation_feed">
         <argument
             android:name="image_path"
             app:argType="string" />
         <action
             android:id="@+id/action_postFragment_to_navigation_feed"
-            app:popUpTo="@+id/navigation_feed"
-            app:popUpToInclusive="true"
-             />
+            app:popUpTo="@id/navigation_feed"
+            app:popUpToInclusive="false" />
     </fragment>
+    <fragment
+        android:id="@+id/cameraFragment2"
+        android:name="com.alok.worldoffood.ui.cameraStrory.CameraFragment"
+        android:label="fragment_camera"
+        tools:layout="@layout/fragment_camera" />
+
 </navigation>
 
 
